@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 2019_08_16_015555) do
   create_table "availabilities", force: :cascade do |t|
     t.date "from"
     t.date "to"
+    t.integer "plant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "plant_id"
   end
 
   create_table "bookings", force: :cascade do |t|
