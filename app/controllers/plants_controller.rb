@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 class PlantsController < ApplicationController
+# TODO remove when login is implemented
+skip_before_action :verify_authenticity_token
+
   def index
     # if params[:name].present? do
     #   plants = Plant.find_by(name: params[:name])
@@ -9,24 +14,45 @@ class PlantsController < ApplicationController
     #
     # plants = Plant.find_by(apistring)
     plants = Plant.all
-    render :json => plants
+    render json: plants
   end
 
-  def show
+  def show;
   end
 
-  def new
+  def new;
   end
 
   def create
+    @plant = Plant.new(plant_params)
+
+    respond_to do |format|
+      if @plant.save
+        puts "Plant saved success"
+        format.json { render :show, status: :created, plant: @plant }
+      else
+        puts "Plant save error"
+        format.json { render json: @plant.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def edit
+  def edit;
   end
 
-  def update
+  def update;
   end
 
-  def destroy
+  def destroy;
+  end
+
+  private
+
+  def set_plant
+    @plant = Plant.find(params[:id])
+  end
+
+  def plant_params
+    params.require(:plant).permit(:name, :images, :age, :status, :cost, :worth, :description)
   end
 end
