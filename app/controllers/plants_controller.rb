@@ -23,6 +23,7 @@ skip_before_action :verify_authenticity_token
   def new;
   end
 
+
   def create
     @plant = Plant.new(plant_params)
 
@@ -41,7 +42,20 @@ skip_before_action :verify_authenticity_token
   end
 
   def update;
+    @plant = Plant.find params[:id]
+    if params[:file].present?
+      # Then call Cloudinary's upload method, passing in the file in params
+      req = Cloudinary::Uploader.upload(params[:file])
+      # Using the public_id allows us to use Cloudinary's powerful image
+      # transformation methods.
+      @plant.images = req["public_id"]
+    else
+      @plant.images = '31-316009_leaves-plant-stem-silhouette-png-image-_f5mmey' #set detault image
+    end
+    @plant.save
+    render json: @plant
   end
+
 
   def destroy;
   end
