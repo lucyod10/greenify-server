@@ -7,6 +7,7 @@
 #  to         :date
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  plant_id   :integer
 #
 
 class Availability < ApplicationRecord

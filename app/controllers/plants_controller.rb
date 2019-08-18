@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 class PlantsController < ApplicationController
-# TODO remove when login is implemented
-skip_before_action :verify_authenticity_token
+  # blocks the user from seeing these pages unless they're logged in
+  # Commented out for Development Mode
+  # before_action :authenticate_user
+
+  # TODO remove when login is implemented
+  # skip_before_action :verify_authenticity_token
 
   def index
     # if params[:name].present? do
@@ -22,9 +26,8 @@ skip_before_action :verify_authenticity_token
     render json: plants
   end
 
-  def new;
+  def new
   end
-
 
   def create
     @plant = Plant.new(plant_params)
@@ -40,10 +43,10 @@ skip_before_action :verify_authenticity_token
     end
   end
 
-  def edit;
+  def edit
   end
 
-  def update;
+  def update
     @plant = Plant.find params[:id]
     if params[:file].present?
       # Then call Cloudinary's upload method, passing in the file in params
@@ -59,7 +62,11 @@ skip_before_action :verify_authenticity_token
   end
 
 
-  def destroy;
+  def destroy
+    @plant = Plant.find params[:id]
+    if current_user.admin?
+      @plant.destroy
+    end
   end
 
   private
