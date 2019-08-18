@@ -3,7 +3,7 @@
 class PlantsController < ApplicationController
   # blocks the user from seeing these pages unless they're logged in
   # Commented out for Development Mode
-  # before_action :authenticate_user
+  #before_action :authenticate_user, :except => [:index, :show]
 
   # TODO remove when login is implemented
   # skip_before_action :verify_authenticity_token
@@ -30,17 +30,21 @@ class PlantsController < ApplicationController
   end
 
   def create
-    @plant = Plant.new(plant_params)
+    # Check if the user is logged in, and is a seller. Otherwise don't allow them to create.
+    #if current_user.is_seller?
+      raise 'hell'
+      @plant = Plant.new(plant_params)
 
-    respond_to do |format|
-      if @plant.save
-        puts "Plant saved success"
-        format.json { render :show, status: :created, plant: @plant }
-      else
-        puts "Plant save error"
-        format.json { render json: @plant.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @plant.save
+          puts "Plant saved success"
+          format.json { render :show, status: :created, plant: @plant }
+        else
+          puts "Plant save error"
+          format.json { render json: @plant.errors, status: :unprocessable_entity }
+        end
       end
-    end
+    #end
   end
 
   def edit

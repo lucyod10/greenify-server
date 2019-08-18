@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # blocks the user from seeing these pages unless they're logged in, except to create a user
   # Commented out for Development Mode
-  # before_action :authenticate_user, :except => :create
+  before_action :authenticate_user, :except => [:create]
 
   def index
     users = User.all
