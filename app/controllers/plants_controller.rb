@@ -17,7 +17,9 @@ skip_before_action :verify_authenticity_token
     render json: plants
   end
 
-  def show;
+  def show
+    plants = Plant.find(params[:id])
+    render json: plants
   end
 
   def new;
