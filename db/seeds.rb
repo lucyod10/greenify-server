@@ -1,9 +1,9 @@
 User.destroy_all
 puts "Creating Users..."
 
-u1 = User.create :name => "Gopi", :email => "gopi@ga.com", :is_seller => false
-u2 = User.create :name => "Lucy", :email => "lucy@ga.com", :is_seller => true
-u3 = User.create :name => "Paulina", :email => "paulina@ga.com", :is_seller => false
+u1 = User.create :name => "Gopi", :email => "gopi@ga.com", :password => "chicken", :password_confirmation => "chicken", :is_seller => false
+u2 = User.create :name => "Lucy", :email => "lucy@ga.com", :password => "chicken", :password_confirmation => "chicken",  :is_seller => true
+u3 = User.create :name => "Paulina", :email => "paulina@ga.com", :password => "chicken", :password_confirmation => "chicken",  :is_seller => false, :admin => true
 
 Plant.destroy_all
 puts "Creating Plants..."
