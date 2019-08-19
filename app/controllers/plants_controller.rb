@@ -32,21 +32,27 @@ class PlantsController < ApplicationController
   def create
     # Check if the user is logged in, and is a seller. Otherwise don't allow them to create.
     #if current_user.is_seller?
-      @plant = Plant.new plant_params
-      @plant.save
+      @plant = Plant.create plant_params
+
+      render json: @plant
 
       #this caused error, it said format doesnt exist????????? WOrks when commented out.
 
-      if params[:file].present?
-        # Then call Cloudinary's upload method, passing in the file in params
-        req = Cloudinary::Uploader.upload(params[:file])
-        # Using the public_id allows us to use Cloudinary's powerful image
-        # transformation methods.
-        @plant.images = req["public_id"]
-      else
-        @plant.images = '31-316009_leaves-plant-stem-silhouette-png-image-_f5mmey' #set detault image
-      end
-    #end
+      #
+      # if params[:plant][:file].present?
+      #   # Then call Cloudinary's upload method, passing in the file in params
+      #   req = Cloudinary::Uploader.upload(params[:plant][:file])
+      #   # Using the public_id allows us to use Cloudinary's powerful image
+      #   # transformation methods.
+      #   @plant.images = req["public_id"]
+
+      # else
+        # @plant.images = '31-316009_leaves-plant-stem-silhouette-png-image-_f5mmey' #set detault image
+      # end
+
+
+    # end
+    #@plant.save
   end
 
   def edit
@@ -54,6 +60,7 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find params[:id]
+
     if params[:file].present?
       # Then call Cloudinary's upload method, passing in the file in params
       req = Cloudinary::Uploader.upload(params[:file])
