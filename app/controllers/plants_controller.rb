@@ -37,15 +37,15 @@ class PlantsController < ApplicationController
 
       #this caused error, it said format doesnt exist????????? WOrks when commented out.
 
-      # respond_to do |format|
-      #   if @plant.save
-      #     puts "Plant saved success"
-      #     format.json { render :show, status: :created, plant: @plant }
-      #   else
-      #     puts "Plant save error"
-      #     format.json { render json: @plant.errors, status: :unprocessable_entity }
-      #   end
-      # end
+      if params[:file].present?
+        # Then call Cloudinary's upload method, passing in the file in params
+        req = Cloudinary::Uploader.upload(params[:file])
+        # Using the public_id allows us to use Cloudinary's powerful image
+        # transformation methods.
+        @plant.images = req["public_id"]
+      else
+        @plant.images = '31-316009_leaves-plant-stem-silhouette-png-image-_f5mmey' #set detault image
+      end
     #end
   end
 
