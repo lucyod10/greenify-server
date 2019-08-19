@@ -32,17 +32,20 @@ class PlantsController < ApplicationController
   def create
     # Check if the user is logged in, and is a seller. Otherwise don't allow them to create.
     #if current_user.is_seller?
-      @plant = Plant.new(plant_params)
+      @plant = Plant.new plant_params
+      @plant.save
 
-      respond_to do |format|
-        if @plant.save
-          puts "Plant saved success"
-          format.json { render :show, status: :created, plant: @plant }
-        else
-          puts "Plant save error"
-          format.json { render json: @plant.errors, status: :unprocessable_entity }
-        end
-      end
+      #this caused error, it said format doesnt exist????????? WOrks when commented out.
+
+      # respond_to do |format|
+      #   if @plant.save
+      #     puts "Plant saved success"
+      #     format.json { render :show, status: :created, plant: @plant }
+      #   else
+      #     puts "Plant save error"
+      #     format.json { render json: @plant.errors, status: :unprocessable_entity }
+      #   end
+      # end
     #end
   end
 
