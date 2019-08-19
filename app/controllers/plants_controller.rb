@@ -3,7 +3,7 @@
 class PlantsController < ApplicationController
   # blocks the user from seeing these pages unless they're logged in
   # Commented out for Development Mode
-  before_action :authenticate_user, :except => [:index, :show]
+  before_action :authenticate_user, :except => [:index, :show, :availabilities]
 
   # TODO remove when login is implemented
   # skip_before_action :verify_authenticity_token
@@ -26,7 +26,13 @@ class PlantsController < ApplicationController
     render json: plants
   end
 
+  def availabilities
+    plant = Plant.find(params[:id]).availabilities
+    render json: plant
+  end
+
   def new
+
   end
 
   def create
