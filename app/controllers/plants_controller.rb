@@ -61,17 +61,25 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find params[:id]
 
-    if params[:file].present?
-      # Then call Cloudinary's upload method, passing in the file in params
-      req = Cloudinary::Uploader.upload(params[:file])
-      # Using the public_id allows us to use Cloudinary's powerful image
-      # transformation methods.
-      @plant.images = req["public_id"]
+
+    if request.patch?
+        @plant.update plant_params
+
     else
-      @plant.images = '31-316009_leaves-plant-stem-silhouette-png-image-_f5mmey' #set detault image
-    end
+        if params[:file].present?
+          # Then call Cloudinary's upload method, passing in the file in params
+          req = Cloudinary::Uploader.upload(params[:file])
+          # Using the public_id allows us to use Cloudinary's powerful image
+          # transformation methods.
+          @plant.images = req["public_id"]
+        elsif !@plant.images.present?
+            @plant.images = '31-316009_leaves-plant-stem-silhouette-png-image-_f5mmey' #set detault image
+        end
     @plant.save
+    end
+
     render json: @plant
+
   end
 
 
