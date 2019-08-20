@@ -36,6 +36,15 @@ b2 = Booking.create :from => "2019-08-26", :to => "2019-09-01"
 b3 = Booking.create :from => "2019-08-06", :to => "2019-08-08"
 b4 = Booking.create :from => "2019-08-09", :to => "2019-08-13"
 
+Comment.destroy_all
+puts "Creating Comments..."
+
+c1 = Comment.create :comment => "Wow what a cool looking fellow!", :rating => 4, :user_id => u1.id
+c2 = Comment.create :comment => "That sure is a lovely plant you have there", :rating => 5, :user_id => u1.id
+c3 = Comment.create :comment => "I didn't connect with the plant much", :rating => 2, :user_id => u2.id
+c4 = Comment.create :comment => "Would love to rent again!", :rating => 5, :user_id => u3.id
+
+
 puts "Creating Associations..."
 
 p1.availabilities << a1
@@ -45,6 +54,10 @@ p3.availabilities << a3
 p1.bookings << b1
 p2.bookings << b2
 p3.bookings << b3 << b4
+
+p1.comments << c4
+p2.comments << c3
+p3.comments << c1 << c2
 
 u1.bookings << b1
 u2.bookings << b2 << b4

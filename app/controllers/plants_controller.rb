@@ -3,7 +3,7 @@
 class PlantsController < ApplicationController
   # blocks the user from seeing these pages unless they're logged in
   # Commented out for Development Mode
-  before_action :authenticate_user, :except => [:index, :show, :availabilities, :bookings]
+  before_action :authenticate_user, :except => [:index, :show, :availabilities, :bookings, :comments]
 
   # TODO remove when login is implemented
   # skip_before_action :verify_authenticity_token
@@ -36,6 +36,22 @@ class PlantsController < ApplicationController
     render json: plant
   end
 
+  def comments
+    plant = Plant.find(params[:id]).comments
+    render json: plant
+  end
+
+  def comment
+    plant = Plant.find(params[:id])
+    comment = Comment.new comment_params
+    comment.user_id = current_user.id
+    comment.plant_id = params[:id]
+    comment.save
+
+    plant.comments << comment
+    render json: plant
+  end
+
   def book
     plant = Plant.find(params[:id])
 
@@ -58,7 +74,7 @@ class PlantsController < ApplicationController
     #if current_user.is_seller?
       @plant = Plant.create plant_params
 
-      render json: @plant
+      render :json => @plant
 
       #this caused error, it said format doesnt exist????????? WOrks when commented out.
 
@@ -126,5 +142,9 @@ class PlantsController < ApplicationController
 
   def book_params
     params.require(:booking).permit(:user_id, :plant_id, :from, :to)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:user_id, :plant_id, :comment, :rating)
   end
 end

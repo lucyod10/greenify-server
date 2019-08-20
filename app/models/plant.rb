@@ -19,4 +19,5 @@ class Plant < ApplicationRecord
   has_many :bookings
   belongs_to :user, :optional => true
   has_many :availabilities
+  has_many :comments
 end
