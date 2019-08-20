@@ -3,7 +3,7 @@
 class PlantsController < ApplicationController
   # blocks the user from seeing these pages unless they're logged in
   # Commented out for Development Mode
-  before_action :authenticate_user, :except => [:index, :show, :availabilities]
+  before_action :authenticate_user, :except => [:index, :show, :availabilities, :bookings]
 
   # TODO remove when login is implemented
   # skip_before_action :verify_authenticity_token
@@ -28,6 +28,24 @@ class PlantsController < ApplicationController
 
   def availabilities
     plant = Plant.find(params[:id]).availabilities
+    render json: plant
+  end
+
+  def bookings
+    plant = Plant.find(params[:id]).bookings
+    render json: plant
+  end
+
+  def book
+    plant = Plant.find(params[:id])
+
+    booking = Booking.new book_params
+    booking.user_id = current_user.id
+    booking.plant_id = params[:id]
+    booking.save
+
+    plant.bookings << booking
+
     render json: plant
   end
 
@@ -104,5 +122,9 @@ class PlantsController < ApplicationController
 
   def plant_params
     params.require(:plant).permit(:name, :images, :age, :status, :cost, :worth, :description)
+  end
+
+  def book_params
+    params.require(:booking).permit(:user_id, :plant_id, :from, :to)
   end
 end
