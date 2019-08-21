@@ -37,8 +37,9 @@ class PlantsController < ApplicationController
   end
 
   def comments
-    plant = Plant.find(params[:id]).comments
-    render json: plant
+    @comment = Plant.find(params[:id]).comments
+    
+    render "comment.json"
   end
 
   def comment

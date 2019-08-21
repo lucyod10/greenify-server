@@ -5,8 +5,8 @@ class AvailabilitiesController < ApplicationController
   end
 
   def show
-    availabilities = Availability.find(params[:id])
-    render json: availabilities
+    @availability = Availability.find(params[:id])
+    render :json => @availability
   end
 
   def new
