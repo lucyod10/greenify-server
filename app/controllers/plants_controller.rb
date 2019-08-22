@@ -38,7 +38,7 @@ class PlantsController < ApplicationController
 
   def comments
     @comment = Plant.find(params[:id]).comments
-    
+
     render "comment.json"
   end
 
@@ -74,6 +74,12 @@ class PlantsController < ApplicationController
     # Check if the user is logged in, and is a seller. Otherwise don't allow them to create.
     #if current_user.is_seller?
       @plant = Plant.create plant_params
+
+      availability = Availability.create(params[:date_from], params[:date_to])
+      availability.user_id = current_user.id
+      @plant.user_id = current_user.id
+      availability.save
+      @plant.availabilities << availability
 
       render :json => @plant
 
