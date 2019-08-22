@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   post '/plants/:id/comments' => 'plants#comment'
   resources :bookings
   resources :comments
+
+  get '/current_user' => 'users#loggedin_user'
+
 end
