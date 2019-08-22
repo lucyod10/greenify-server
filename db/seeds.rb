@@ -62,3 +62,7 @@ p3.comments << c1 << c2
 u1.bookings << b1
 u2.bookings << b2 << b4
 u3.bookings << b3
+
+u1.plants << p1
+u2.plants << p2 << p4
+u3.plants << p3

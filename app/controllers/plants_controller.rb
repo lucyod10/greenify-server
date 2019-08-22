@@ -9,15 +9,17 @@ class PlantsController < ApplicationController
   # skip_before_action :verify_authenticity_token
 
   def index
-    # if params[:name].present? do
-    #   plants = Plant.find_by(name: params[:name])
-    # end
+    if params[:name].present?
+      plants = Plant.find_by(name: params[:name])
+    else
+      plants = Plant.all
+    end
     #
     # THis is the string to add to the end of the URL to filer: (separate by "&")
     # ?id=9&name=Touch%20Me%20Not
     #
     # plants = Plant.find_by(apistring)
-    plants = Plant.all
+
     render json: plants
   end
 
@@ -74,10 +76,15 @@ class PlantsController < ApplicationController
     # Check if the user is logged in, and is a seller. Otherwise don't allow them to create.
     #if current_user.is_seller?
       @plant = Plant.create plant_params
+      # require 'pry'
+      # binding.pry
 
-      availability = Availability.create(params[:date_from], params[:date_to])
-      availability.user_id = current_user.id
+      # TODO: the availabilities to and from arent saving, but it is associating
+      availability = Availability.create :from => params[:plant][:availability][:from], :to => params[:plant][:availability][:to]
+      availability.plant_id = @plant.id
+      # TODO: This is saving as nil?
       @plant.user_id = current_user.id
+      current_user.plants << @plant
       availability.save
       @plant.availabilities << availability
 
@@ -154,4 +161,10 @@ class PlantsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:user_id, :plant_id, :comment, :rating)
   end
+
+  def availability_params
+    params.require(:plant).permit(:from, :to)
+  end
+
+
 end

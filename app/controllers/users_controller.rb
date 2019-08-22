@@ -9,8 +9,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find params[:id]
-    render :json => user
+    @user = User.find params[:id]
+    @plants = @user.plants
+    @bookings = @user.bookings
+    render "show.json"
   end
 
   def new
