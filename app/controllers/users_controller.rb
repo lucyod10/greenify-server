@@ -25,6 +25,12 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def loggedin_user
+    render json: { :name => current_user.name }
+  end
+
+
   def edit
   end
 
@@ -33,6 +39,7 @@ class UsersController < ApplicationController
 
   def destroy
   end
+
 
   private
   def user_params
