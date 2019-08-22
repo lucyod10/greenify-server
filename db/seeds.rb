@@ -64,5 +64,5 @@ u2.bookings << b2 << b4
 u3.bookings << b3
 
 u1.plants << p1
-u2.plants << p2 << p4
-u3.plants << p3
+u2.plants << p2 << p4 << p5 << p6 << p7 << p8 << p9
+u3.plants << p3 << p10 << p12

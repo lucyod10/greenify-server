@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
 
   def loggedin_user
-    render json: { :name => current_user.name }
+    render json: { :name => current_user.name, :is_seller => current_user.is_seller, :admin => current_user.admin, :id => current_user.id }
   end
 
 
