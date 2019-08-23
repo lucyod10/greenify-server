@@ -1,0 +1,41 @@
+Table bookings {
+  plant_id int [ref: > plants.id]
+  user_id int [ref: > users.id]
+  from date
+  to date
+
+}
+
+Table availabilities {
+  from date
+  to date
+  plant_id int [ref: > plants.id]
+}
+Table users {
+  id int [pk] 
+  name text
+  email text
+  password_digest text
+  is_seller boolean
+  admin boolean
+}
+
+
+Table comments {
+  user_id int [ref: > users.id]
+  plant_id int [ref: > plants.id]
+  comment text
+  rating int
+}
+
+Table plants {
+  id int [pk]
+  name text
+  images text
+  age text
+  status text
+  cost int
+  worth int
+  description text
+  user_id int [ref: > users.id]
+}

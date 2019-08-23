@@ -20,6 +20,9 @@ p9 = Plant.create :name => "Rooting plant in the water", :images => "v1566178231
 p10 = Plant.create :name => "Sword Fern", :images => "v1566178276/bb751a2ef92fec3ac42481a0d5bb259f_gwmgwx.jpg", :age => "2 years", :status => "A bit old, be careful with it and don't forget to water", :cost => 75, :worth => 500, :description => "A stunning plant which will calm you down."
 p11 = Plant.create :name => "Rare Kalen-choe Manginii", :images => "v1566178323/426bfba992a7bc8bf16187470f9a69c3_gef0om.jpg", :age => "2 months", :status => "A perfect condition", :cost => 50, :worth => 300, :description => "A beautiful indoor plant. It is just so pretty!"
 p12 = Plant.create :name => "Monstera Obliqua", :images => "v1566178373/b6985fc0437a0999c28c06cf02c44a9b_efhmbx.jpg", :age => "4 weeks", :status => "A very demanding plant. Please water as much as possible", :cost => 30, :worth => 150, :description => "Swiss Cheese vine, often called Monstera obliqua or Monstera adansonii, is a beautiful addition to any home. Here's how to grow and care for them."
+p13 = Plant.create :name => "Orchid", :images => "v1566522763/3acbb9680e0d41a9b487d1ef4d5cef2b_uxxhqa.jpg", :age => "4 months", :status => "A bit fragile", :cost => 80, :worth => 1000, :description => "A plant that was customised! Imported it all the way from China"
+p14 = Plant.create :name => "Monstera Obliqua", :images => "v1566522821/a0cd274b494362fa79b5cb7325aa7e46_ikt2po.jpg", :age => "12 months", :status => "Very low maintanence", :cost => 100, :worth => 250, :description => "A massive plant. 6 feet tall. It has already participated in many tv commercials."
+p15 = Plant.create :name => "Pink plant", :images => "v1566523046/f0d9e43b4a4f888e31e249825e0baede_pubmns.jpg", :age => "8 months", :status => "Very delicate", :cost => 50, :worth => 500, :description => "The prettiest plant on the planet"
 
 Availability.destroy_all
 puts "Creating Availabilities..."
