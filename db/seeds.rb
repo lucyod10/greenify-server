@@ -30,6 +30,19 @@ puts "Creating Availabilities..."
 a1 = Availability.create :from => "2019-08-20", :to => "2019-09-15"
 a2 = Availability.create :from => "2019-08-21", :to => "2019-09-18"
 a3 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a4 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a5 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a6 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a7 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a8 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a9 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a10 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a11 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a12 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a13 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a14 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+a15 = Availability.create :from => "2019-08-05", :to => "2019-09-01"
+
 
 Booking.destroy_all
 puts "Creating Bookings..."
@@ -53,6 +66,18 @@ puts "Creating Associations..."
 p1.availabilities << a1
 p2.availabilities << a2
 p3.availabilities << a3
+p4.availabilities << a4
+p5.availabilities << a5
+p6.availabilities << a6
+p7.availabilities << a7
+p8.availabilities << a8
+p9.availabilities << a9
+p10.availabilities << a10
+p11.availabilities << a11
+p12.availabilities << a12
+p13.availabilities << a13
+p14.availabilities << a14
+p15.availabilities << a15
 
 p1.bookings << b1
 p2.bookings << b2
